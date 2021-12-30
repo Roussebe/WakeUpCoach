@@ -92,34 +92,34 @@ ajaxPost( "/users/todays_habits/{{_id}}", postData, (data) => { console.log( "Do
 router.post('/todays_habits/:id', ensureAuth, async (req, res) => {
   console.log( "New today's habit ", req.body )
   try {
-    const user = await User.asyncFindOne( { _id: req.user._id })
+    const user = await User.findOne( { _id: req.user._id }).lean()
     console.log( user )
     if( !user ) return res.sendStatus( 404 ) //render('error/404')
 
     if( ! user._id.equals( req.user._id ) ) res.sendStatus( 401 ) // res.redirect('/users')
 
-    if( !user.todays_habit || moment(user.todays_habit.date) <  moment().subtract( 5, "minutes" ) )  {
+    if( !user.todaysHabit || moment(user.todaysHabit.date) <  moment().subtract( 5, "minutes" ) )  {
       console.log( "Reset habits" )
 
-      if( !user.history ) { user.history = [] }
-      user.history.push({
-        date: user.todays_habit.date,
-        habits: user.todays_habit.habits.length
-      })
+      // Save previous achievements in history
+      if( user.todaysHabit ) {
+        if( !user.history ) { user.history = [] }
+        user.history.push({
+          date: user.todaysHabit.date,
+          habits: user.todaysHabit.habits.length
+        })
+      }
 
-      user.todays_habit = {
+      user.todaysHabit = {
         date: new Date(),
         habits: []
       }
     }
 
-    if( ! user.todays_habit.habits.find( (h) => { return h.id == req.body.id.substring(6) }))
-      user.todays_habit.habits.push( { date: new Date(), id: req.body.id.substring( 6 ) })
-      else {
-        console.log( "avoid duplicates" )
-      }
-    //console.log( user )
-    console.log( user.todays_habit )
+    if( ! user.todaysHabit.habits.find( (h) => { return h.id == req.body.id.substring(6) }))
+      user.todaysHabit.habits.push( { date: new Date(), id: req.body.id.substring( 6 ) })
+
+    console.log( user.todaysHabit )
 
     await User.updateOne( { _id: req.user._id }, user )
 

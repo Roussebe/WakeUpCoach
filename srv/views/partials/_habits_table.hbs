@@ -29,21 +29,8 @@
     function saveHabitSelection() {
         let postData = { result : [] }
         $( "#modal1_table tbody input" ).each( (index, d) => { if( $(d).is(':checked') ) postData.result.push( d.id ) } )
-        //console.log( postData )
-        $.ajax( {
-          type: "POST",
-          dataType:"json",
-          contentType: "application/json",
-          url: "/rituals/add_habit/{{_id}}",
-          data: JSON.stringify(postData)
-        })
-        .done( (data) => {
-          console.log( "Done ", data )
-        })
-        .fail(function(xhr, textStatus, errorThrown) {
-          console.log("ERROR: ",xhr.responseText)
-          return xhr.responseText;
-        })
+        ajaxPost( "/rituals/add_habit/{{_id}}", postData, console.log )
+        //$.post( "/rituals/add_habit/{{_id}}", JSON.stringify(postData), console.log, "json" )
     }
 
     function initModal1() {
@@ -120,6 +107,9 @@ function initRitualsCheckBox() {
 <script>
 
 function ajaxPost( url, data, next ) {
+  console.log( url )
+  console.log( data )
+
   $.ajax( {
     type: "POST",
     dataType:"json",

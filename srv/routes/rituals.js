@@ -38,10 +38,12 @@ router.get('/:id', ensureAuth, async (req, res) => {
     if (ritual.user._id != req.user._id && ritual.status == 'private') {
       res.render('error/404')
     } else {
-      console.log( user.todays_habit )
-      if( user.todays_habit && moment(user.todays_habit.date) > moment().subtract(5, "minutes" ) ) {
+      console.log( user )
+      console.log( user.todaysHabit )
+      if( user.todaysHabit && moment(user.todaysHabit.date) > moment().subtract(5, "minutes" ) ) {
         ritual.habits = ritual.habits.map( (h) => {
-          let user_habit = user.todays_habit.habits.find( (uh) => { return uh.id == h._id })
+          console.log( "H", h )
+          let user_habit = user.todaysHabit.habits.find( (uh) => { console.log( "UH", uh ) ; return h._id.equals( uh.id ) })
           if( user_habit ) {
             h.selected = true
           }
@@ -61,10 +63,11 @@ router.get('/:id', ensureAuth, async (req, res) => {
 
 router.get('/edit/:id', ensureAuth, async (req, res) => {
     try {
+      console.log( "Edit ritual " + req.params.id )
         let user = await User.findOne( { _id: req.user._id } )
         if( !user.admin ) return res.render('error/401')
 
-        const ritual = await Ritual.findOne( { _id: req.params.id })
+        const ritual = await Ritual.findOne( { _id: req.params.id }).lean()
         if( !ritual ) return res.render('error/404')
 
         res.render('rituals/edit', {ritual} )
@@ -94,6 +97,7 @@ router.put('/:id', ensureAuth, async (req, res) => {
 
     console.log( upd_ritual )
     console.log( req.body )
+
 
     if( upd_ritual.user != req.user._id && !user.admin ) res.redirect('/habit')  //For the moment, can only update yourself
     else  {
@@ -137,14 +141,18 @@ router.get('/list_to_add/:rid', ensureAuth, async (req, res) => {
 
 router.post('/add_habit/:rid', ensureAuth, async (req, res) => {
     console.log( "Adding habit(s) to ritual " + req.params.rid )
-    let user = await User.findOne( { _id: req.user._id } )
-    let ritual = await Ritual.findOne( { _id: req.params.rid } )
-    let habits = await Habit.find( {} )
+    let user = await User.findOne( { _id: req.user._id } ).lean()
+    let ritual = await Ritual.findOne( { _id: req.params.rid } ).lean()
+    let habits = await Habit.find( {} ).lean()
 
     if( !user || !ritual || !habits )
-        return req.setStatus( 404 ).send() // res.render('error/404')
+        return res.status( 404 ).send() // res.render('error/404')
 
-    if( ! ritual.user.equals( req.user._id ) ) return req.setStatus( 401 ).send() //res.render( 'error/401' )
+    if( ! ritual.user.equals( req.user._id ) ) return res.status( 401 ).send() //res.render( 'error/401' )
+
+    console.log( req.body )
+
+    if( !req.body.result ) return res.status( 400 ).send()
 
     let newSetting = req.body.result.map( (r) => {
       let id = r.substring( 6 )
