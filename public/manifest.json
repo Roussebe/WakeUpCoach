@@ -1,0 +1,14 @@
+{
+  "name": "GoodHabits",
+  "short_name": "GoodHabits",
+  "start_url": "/login",
+  "display": "standalone",
+  "background_color": "#4bd6ac",
+  "theme_color": "#00695c",
+  "orientation": "portrait-primary",
+  "icons":[
+    {
+
+    }
+  ]
+}
