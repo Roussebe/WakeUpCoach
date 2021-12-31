@@ -1,7 +1,7 @@
 {
   "name": "GoodHabits",
   "short_name": "GoodHabits",
-  "start_url": "index.html",
+  "start_url": "/dashboard",
   "display": "standalone",
   "background_color": "#4bd6ac",
   "theme_color": "#00695c",
