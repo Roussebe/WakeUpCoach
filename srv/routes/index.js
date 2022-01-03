@@ -4,7 +4,7 @@ const router = express.Router()
 const { ensureAuth, ensureGuest } = require( './middleware' )
 const Ritual = require( '../models/Ritual' )
 const User = require('../models/User' )
-
+const Habit = require('../models/Habit')
 router.get('/', ensureGuest, (req, res) => {
     res.render('login', { layout: 'login' })
 })
@@ -138,8 +138,6 @@ router.post('/api/data', ensureAuth, async(req, res) => {
       await Ritual.updateOne( {_id: ritual._id }, ritual )
     } else {
       console.log( "Don't add habit for today... TODO: avoid double click on UI :-)")
-      console.log( "Ritual history", ritual.history.habits )
-
     }
 
     res.send( { status: "ok" } ) //res.render('users/edit', {show_user} )
@@ -147,7 +145,17 @@ router.post('/api/data', ensureAuth, async(req, res) => {
     console.error( err )
     return res.sendStatus( 500 ) //res.render('error/500')
   }
+})
 
+router.get('/api/list_habits', ensureAuth, async (req, res) => {
+    try {
+        const habits = await Habit.find( { } ).lean()
+        console.log( habits )
+        res.send({ habits })
+    } catch( err ) {
+        console.error( err )
+        res.sendStatus( 500 )
+    }
 })
 
 module.exports = router

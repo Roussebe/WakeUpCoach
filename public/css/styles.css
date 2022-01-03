@@ -4,7 +4,7 @@
   --secondary: #202020 ;
   --title: #ffffff  ;
   --button: #0000ff ;
-  --card-bg: #99ccff ;
+  --card-bg: #cce5ff ;
 }
 
 /* layout styles */
@@ -22,7 +22,6 @@ nav a span{
 nav .sidenav-trigger{
   margin: 0;
 }
-
 
 h1 {
   font-size: 20px !important;
@@ -167,9 +166,21 @@ form .input-field{
   margin-top: 10px;
 }
 
-.gh-options i{
+.gh-options {
+}
+.gh-options a {
+  float: left;
+  margin-right: 10px;
+
   display: flex;
   flex-direction: column;
+  font-size: 1.5em;
   justify-content: space-evenly;
   align-items: center;
+  color: #000000 ;
+
+}
+
+.gh-options a i {
+
 }

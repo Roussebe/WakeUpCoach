@@ -33,8 +33,8 @@ export class Habit extends React.Component {
       </div>
       <div class="gh-options"><a onClick={(e) => this.tickHabit(e, habit, ritual)}>
         {habit.achieved
-          ? <i class="far fa-check-circle tiny" />
-          : <i class="far fa-circle tiny" />
+          ? <i class="green-text far fa-check-circle" />
+          : <i class="blue-text far fa-circle" />
         }
       </a></div>
       </div>
