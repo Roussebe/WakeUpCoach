@@ -65,10 +65,15 @@ h1 {
 .gh-title{
   font-weight: bold;
 }
+.gh-subtitle{
+  font-size: 0.8em;
+  color: #000000;
+}
 .gh-time{
   font-size: 0.8em;
   color: #000000;
 }
+
 
 .call_out{
   width: 18px;
@@ -108,7 +113,7 @@ form .input-field{
   margin-bottom: 8px;
 }
 
-.habits-card{
+.habit-card{
   display: flex;
   align-items: center;
   justify-content:space-between;
@@ -121,7 +126,6 @@ form .input-field{
   background: var(--card-bg) ;
   align-items: center;
   margin-bottom: 4px;
-    font-size: 10px !important;
 }
 
 .dash-card-matin {
@@ -163,7 +167,7 @@ form .input-field{
   margin-top: 10px;
 }
 
-.gh-options{
+.gh-options i{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

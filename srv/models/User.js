@@ -38,10 +38,6 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  todaysHabit: {
-    type: Object,
-    required: false,
-  }
 })
 
 module.exports = mongoose.model('User', UserSchema)

@@ -28,6 +28,11 @@ const RitualSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  history: {
+    type: Object,
+    required: false,
+    default: {}
+  },
   createdAt: {
     type: Date,
     default: Date.now,

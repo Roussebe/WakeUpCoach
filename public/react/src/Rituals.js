@@ -21,8 +21,6 @@ export class Ritual extends React.Component {
   }
 }
 
-
-
 export function Rituals( props ) {
   console.log( props )
   console.log( "Rituals" )
