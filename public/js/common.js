@@ -9,29 +9,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   const forms = document.querySelectorAll('.side-form');
   M.Sidenav.init(forms, {edge: 'right'});
 
-  let profile = await $.get('/api/basic_profile');
-  console.log( profile )
 
-  let content = ""
-
-  console.log( $("#rituals").html() )
-  for( let r of profile.rituals ) {
-    content += `<div class="white-text text-darken-1 pk-contact">
-          <div class="contact-image">
-            <img src="img/pkcontacts.png" alt="contact thumb">
-          </div>
-          <div class="contact-details">
-            <div class="contact-title">${r.title}</div>
-            <div class="contact-numbers">+130902092309</div>
-          </div>
-          <div class="contact-options">
-            <i class="material-icons">call</i>
-            <i class="material-icons">delete_outline</i>
-          </div>
-        </div>`
-    }
-
-    $("#rituals").html( content )
 });
 
 

@@ -14,7 +14,7 @@ const connectDB = require('./config/db')
 const passport = require('passport');
 const {create} = require('express-handlebars')
 
-console.log( "Starting up" )
+console.log( "Starting up " + Date() )
 
 
 dotenv.config( {path: './srv/config/config.env' })

@@ -117,7 +117,7 @@ router.post('/todays_habits/:id', ensureAuth, async (req, res) => {
     }
 
     if( ! user.todaysHabit.habits.find( (h) => { return h.id == req.body.id.substring(6) }))
-      user.todaysHabit.habits.push( { date: new Date(), id: req.body.id.substring( 6 ) })
+      user.todaysHabit.habits.push( { date: new Date(), id: req.body.id.substring(6) })
 
     console.log( user.todaysHabit )
 
