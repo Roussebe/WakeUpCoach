@@ -1,10 +1,13 @@
 const express = require( 'express' )
 const moment = require( 'moment' )
 const router = express.Router()
+
 const { ensureAuth, ensureGuest } = require( './middleware' )
 const Ritual = require( '../models/Ritual' )
 const User = require('../models/User' )
 const Habit = require('../models/Habit')
+
+
 router.get('/', ensureGuest, (req, res) => {
     res.render('login', { layout: 'login' })
 })

@@ -27,14 +27,14 @@ export class Habit extends React.Component {
     const habit = this.state.habit
     const ritual = this.state.ritual
     return (
-      <div class="black-text habit-card">
-        <div class="gh-details">
-        <div class="gh-subtitle" onClick={(e) => this.showHabit(e, habit, ritual)}>{habit.title}</div>
+      <div className="black-text habit-card">
+        <div className="gh-details">
+        <div className="gh-subtitle" onClick={(e) => this.showHabit(e, habit, ritual)}>{habit.title}</div>
       </div>
-      <div class="gh-options"><a onClick={(e) => this.tickHabit(e, habit, ritual)}>
+      <div className="gh-options"><a onClick={(e) => this.tickHabit(e, habit, ritual)}>
         {habit.achieved
-          ? <i class="green-text far fa-check-circle" />
-          : <i class="blue-text far fa-circle" />
+          ? <i className="green-text far fa-check-circle" />
+          : <i className="blue-text far fa-circle" />
         }
       </a></div>
       </div>

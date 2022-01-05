@@ -7,6 +7,16 @@ export function Greetings( props ) {
 
 export function Back( props ) {
   return (
-    <div><a class="btn btn-back white black-text" onClick={props.onClick} href="#"><i class="fas fa-arrow-left" /></a></div>
+    <div><a className="btn btn-back white black-text" onClick={props.onClick} href="#"><i className="fas fa-arrow-left" /></a></div>
+  )
+}
+
+export function Button( { name, backgroundColor, onClick } ) {
+  return (
+    <div className="input-field center">
+    <button className="btn-small add-btn" onClick={onClick} style={{backgroundColor}}>
+     {name}
+    </button>
+    </div>
   )
 }

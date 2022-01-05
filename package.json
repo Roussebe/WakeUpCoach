@@ -4,11 +4,18 @@
   "description": "A simple project for a good wake up",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node srv/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon --ignore ./public srv/server.js",
+    "start": "NODE_ENV=production node app/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon --ignore ./public app/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "npx babel --watch public/react/src --out-dir public/react/js --presets @babel/preset-react &",
-    "deploy": "gcloud app deploy -q"
+    "build": "react-scripts build",
+    "deploy": "gcloud app deploy -q",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "build": {
+       "patterns": [ "src" ],
+         "extensions": "js,jsx"
+       }
   },
   "author": "Benoit Rousseau",
   "license": "MIT",
@@ -26,13 +33,30 @@
     "morgan": "^1.10.0",
     "nedb-async": "^0.1.6",
     "passport": "^0.5.2",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "web-vitals": "^2.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.7",
     "@babel/core": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "cross-env": "^7.0.3",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "react-redux": "^7.2.6",
+    "react-scripts": "^5.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

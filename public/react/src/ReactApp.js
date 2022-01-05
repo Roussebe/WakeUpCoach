@@ -1,43 +1,62 @@
-import {Greetings, Back} from './Utils.js'
+import axios from 'https://cdn.skypack.dev/axios';
+
+
+import {Greetings, Back, Button} from './Utils.js'
 import {Ritual, Rituals} from './Rituals.js'
 import {Habits} from './Habits.js'
 import {AddHabitList} from './AddHabitList.js'
 
+
 class ReactApp extends React.Component {
   constructor( props ) {
-    console.log( "Props : " , props )
     super( props )
-    this.state = { show: {layout: "dashboard"}, profile: props.profile, habits: [] }
+    this.state = { show: {layout: "dashboard"},
+                   profile: props.profile,
+                   habits: [] }
   }
 
   onRitualClick( e, ritual ) {
     e.preventDefault()
-    console.log( "Click on Ritual" , e, ritual)
     this.setState( { show: {layout: "ritual", ritual: ritual} })
   }
 
   onBackMainMenu( e ) {
-    console.log( "Back" )
     e.preventDefault()
     this.setState( { show: {layout: "dashboard" } } )
   }
 
   onAddHabitsClick( e, ritual ) {
     e.stopPropagation()
-    console.log( "Add Habits to Ritual", e, ritual )
     this.setState( { show: {layout: "add_habits", ritual: ritual }})
+  }
+
+  onUpdateHabits( habits ) {
+    if( Array.isArray( habits ) ) {
+      console.log( "Update all habit list" )
+      this.setState( { habits: habits } )
+    } else {
+      console.log( "Update a single habit" )
+      const newHabits = this.state.habits.slice()
+      const updIdx = newHabits.findIndex( (h) => h.key == habits.key )
+      newHabits[updIdx] = habits
+      this.setState( { habits: newHabits } )
+    }
   }
 
   onConfirmAddHabits( e, ritual ) {
     e.stopPropagation()
-    console.log( "onConfirmAddHabits Ritual", ritual )
-    console.log( "onConfirmAddHabits", this.props)
-    console.log( this.state )
-  }
 
-  updateHabits( habits ) {
-    console.log( "updateHabits" )
-    this.setState( { habits: habits } )
+    const request = this.state.habits
+      .filter( (h) => h.selected )
+      .map( (h) => {
+        return { _id: h.key, title: h.title }
+      })
+
+    axios.post('/rituals/add_habit/' + ritual.key, {result : request} )
+      .then( (response) => { } )
+      .catch( (error) => { console.error( error ) });
+
+    this.setState( { show: {layout: "dashboard" } } )
   }
 
   render() {
@@ -63,12 +82,13 @@ class ReactApp extends React.Component {
       {show.layout === "add_habits" &&
         <div>
         <Back onClick={(e) => this.onBackMainMenu(e)}/>
-        <Ritual ritual={show.ritual}
+        <Ritual ritual={show.ritual} updators={this.updators}
             onAddHabits={(e, ritual) => this.onConfirmAddHabits( e, ritual )}
             onClick={(e, ritual) => this.onRitualClick( e, ritual )} />
         <AddHabitList ritual={show.ritual} habits={this.state.habits}
-            updateHabits={(habits) => this.updateHabits( habits )}
+            onUpdateHabits={(habits) => this.onUpdateHabits( habits )}
         />
+        <Button name="Confirm" backgroundColor="blue" />
         </div>
       }
       </div>
@@ -76,9 +96,9 @@ class ReactApp extends React.Component {
   }
 }
 
-
 document.addEventListener('DOMContentLoaded', async function() {
   let profile = await $.get('/api/basic_profile');
   console.log( "Profile", profile )
-  ReactDOM.render( <ReactApp profile={profile} />, document.getElementById('root') )
+  ReactDOM.render( <ReactApp profile={profile} />, document.getElementById('root')
+  )
 });

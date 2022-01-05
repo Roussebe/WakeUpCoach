@@ -9,20 +9,22 @@ class AddHabit extends React.Component {
   }
 
   toogleSelection( evt ) {
-    this.setState( {
-      habit: {
-        title: this.state.habit.title,
-        selected: !this.state.habit.selected,
-      }
-    })
+    const habit = {
+      title: this.props.habit.title,
+      selected: !this.props.habit.selected,
+      key: this.props.habit.key
+    }
+
+    this.props.onUpdateHabits( habit )
+
   }
 
   render() {
     return (
-      <tr><td>{this.state.habit.title}</td>
-      {!this.state.habit.selected
-        ? <td class="green-text bold" onClick={this.toogleSelection}>Ajouter</td>
-        : <td class="red-text bold" onClick={this.toogleSelection}>Retirer</td>
+      <tr><td>{this.props.habit.title}</td>
+      {!this.props.habit.selected
+        ? <td className="green-text bold" onClick={this.toogleSelection}>Ajouter</td>
+        : <td className="red-text bold" onClick={this.toogleSelection}>Retirer</td>
       }
       </tr>
     )
@@ -32,38 +34,34 @@ class AddHabit extends React.Component {
 export class AddHabitList extends React.Component {
   constructor( props ) {
     super(props)
+
     console.log( "AddHabitList props", props )
-    this.state = {habits: props.habits }
-    let Obj = this
+
     axios.get('/api/list_habits')
       .then( (response) => {
-        console.log( "Response" , response.data )
-        console.log( props )
+        console.log( "Response to /api/list_habits" , response.data )
         const habits = response.data.habits.map( habit => {
           let selected = props.ritual.habits.find( (h) => { return h._id == habit._id })
-          return { title: habit.title , selected: selected?true:false }
+          return { key: habit._id, title: habit.title , selected: selected?true:false }
         })
-
-        props.updateHabits( habits )
-
+        props.onUpdateHabits( habits )
       } )
       .catch( (error) => { console.error( error ) });
   }
 
-
   render() {
-    const listItems = this.props.habits.map( habit => { return ( <AddHabit habit={habit} key={habit._id}/> ) } )
-console.log( "ListItems", listItems)
+    const listItems = this.props.habits.map( habit => { return ( <AddHabit habit={habit} key={habit.key} onUpdateHabits={this.props.onUpdateHabits} /> ) } )
+    console.log( "ListItems", listItems)
     return (
       <div id="modal1" >
-          <div class="modal-content">
-            <table id="modal1_table" class="striped">
+          <div className="modal-content">
+            <table id="modal1_table" className="striped">
               <tbody>
               {listItems}
               </tbody>
             </table>
           </div>
-          <div class="modal-footer">
+          <div className="modal-footer">
           </div>
       </div>
     )

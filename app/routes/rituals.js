@@ -154,10 +154,10 @@ router.post('/add_habit/:rid', ensureAuth, async (req, res) => {
 
     if( !req.body.result ) return res.status( 400 ).send()
 
-    let newSetting = req.body.result.map( (r) => {
-      let id = r.substring( 6 )
-      let habit = habits.find( h => h._id == id )
-      return { _id: habit._id, title: habit.title }
+    let newSetting = req.body.result.map( (data) => {
+      let habit = habits.find( h => h._id.equals( data._id ) )
+      if( habit )
+        return { _id: habit._id, title: habit.title }
     })
 
     console.log( "New habits: ", newSetting )
