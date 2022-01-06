@@ -21,6 +21,7 @@ const Ritual = ({ritual}) => {
   function validateHabit(e, ritual, habit) {
     dispatch(tickHabit(userData.id, ritual, habit));
   }
+
   function showHabit() {}
 
   return (
@@ -29,7 +30,7 @@ const Ritual = ({ritual}) => {
             <div className="card-header">
               <div className="time left"><h6>{ritual.time}</h6></div>
               <div className="title left"><h6>{ritual.title}</h6></div>
-              <div className="card-actions">
+              <div className="card-actions right">
                 <i className="material-icons black-text">edit</i>
                 <i className="material-icons black-text">add</i>
               </div>

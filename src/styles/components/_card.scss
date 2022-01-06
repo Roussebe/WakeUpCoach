@@ -37,8 +37,6 @@
 }
 
 .card-container {
-  display: grid;
-  grid-template-columns: 66px 1fr;
   border: 2px solid $color-2;
   margin: 10px;
   padding: 16px;
@@ -46,13 +44,8 @@
   margin: 8px auto;
   position: relative;
   min-height: 100px;
+  background: #fdf5f5 !important;
 
-  @media screen and(max-width: 590px) {
-    grid-template-columns: 1fr;
-  }
-  @media screen and(max-width: 440px) {
-    padding-top: 26px;
-  }
 
   .fa-spinner {
     position: absolute;
@@ -63,9 +56,7 @@
   }
 
   .card-right {
-    @media screen and(max-width: 590px) {
-      margin-left: 18px;
-    }
+
     .card-header {
       display: grid;
       grid-template-columns: 1fr 10fr 2fr;
@@ -74,12 +65,11 @@
 
       text-align: left;
 
-      @media screen and(max-width: 590px) {
-        margin: 12px 0 14px;
-      }
 
       .card-actions {
         display: flex;
+        flex-direction: row-reverse;
+
       }
     }
     .card-body {

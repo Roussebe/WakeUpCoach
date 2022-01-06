@@ -14,9 +14,9 @@
   "watch": {
     "build": {
       "patterns": [
-        "src"
+        "src", "public"
       ],
-      "extensions": "js,jsx"
+      "extensions": "js,jsx,scss"
     }
   },
   "author": "Benoit Rousseau",

@@ -37,7 +37,7 @@ class Navbar extends React.Component {
         <li><a href="/stories">Public Stories</a></li>
         <li><a href="/dashboard">Dashboard</a></li>
         <li><a href="/rituals">Rituals</a></li>
-        <li><a href="/habits">Habits</a></li>
+        <li><NavLink exact to="/habits/"><a href="#">Habits</a></NavLink></li>
         <li><a href="/users">Users</a></li>
         <li><a href="/auth/logout">Logout</a></li>
       </ul>

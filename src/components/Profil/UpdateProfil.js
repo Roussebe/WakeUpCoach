@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateBio } from "../../actions/user.actions";
 import { dateParser } from "../Utils";
 //import FollowHandler from "./FollowHandler";
-import LeftNav from "../LeftNav";
 
 const UpdateProfil = () => {
   const [bio, setBio] = useState("");
@@ -23,7 +22,6 @@ const UpdateProfil = () => {
 
   return (
     <div className="profil-container">
-      <LeftNav />
       <h1> Profil de {userData.pseudo}</h1>
       <div className="update-container">
         <div className="left-part">

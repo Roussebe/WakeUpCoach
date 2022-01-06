@@ -20,18 +20,4 @@ const ListRituals = () => {
   );
 };
 
-/*
-{ !userData.rituals && !isEmpty(userData.rituals[0]) &&
-  userData.rituals.map((ritual) => {
-    return <li key={ritual.key}>{ritual.title}</li>
-})}
-
-
-
-  {!isEmpty(userData.rituals[0]) &&
-    userData.rituals.map((ritual) => {
-      return <Ritual ritual={ritual} key={ritual._id} />;
-    })}
-</ul>*/
-
 export default ListRituals;
