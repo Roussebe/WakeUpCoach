@@ -5,21 +5,24 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production node app/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon --ignore ./public app/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon --ignore ./public --ignore ./src --ignore ./build app/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "react-scripts build",
+    "build": "REACT_APP_API_URL='/' react-scripts build",
     "deploy": "gcloud app deploy -q",
-    "watch": "npm-watch"
+    "watch": "npm-watch &"
   },
   "watch": {
     "build": {
-       "patterns": [ "src" ],
-         "extensions": "js,jsx"
-       }
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js,jsx"
+    }
   },
   "author": "Benoit Rousseau",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.24.0",
     "body-parser": "^1.19.0",
     "connect-mongo": "^4.6.0",
     "connect-nedb-session": "^0.0.3",
@@ -27,15 +30,15 @@
     "express": "^4.17.1",
     "express-handlebars": "^6.0.2",
     "express-session": "^1.17.2",
+    "js-cookie": "^3.0.1",
+    "materialize-css": "^1.0.0-rc.2",
     "method-override": "^3.0.0",
     "moment": "^2.29.1",
     "mongoose": "^6.1.4",
     "morgan": "^1.10.0",
-    "nedb-async": "^0.1.6",
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.6",
+    "react-router": "^6.2.1",
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
@@ -44,8 +47,17 @@
     "@babel/preset-react": "^7.16.7",
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.15",
+    "npm-watch": "^0.11.0",
+    "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "react-scripts": "^5.0.0"
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "^5.0.0",
+    "reactjs-popup": "^2.0.5",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.1",
+    "sass": "^1.45.2"
   },
   "browserslist": {
     "production": [

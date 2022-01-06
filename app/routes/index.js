@@ -7,9 +7,14 @@ const Ritual = require( '../models/Ritual' )
 const User = require('../models/User' )
 const Habit = require('../models/Habit')
 
-
+/*
 router.get('/', ensureGuest, (req, res) => {
     res.render('login', { layout: 'login' })
+})
+*/
+
+router.get('/jwtid', ensureAuth, async (req, res) => {
+  res.send( req.user._id )
 })
 
 router.get('/dashboard', ensureAuth, async (req, res) => {
@@ -30,6 +35,7 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
 })
 
 router.get('/api/basic_profile', ensureAuth, async(req, res) => {
+  console.log("DEPRECATED... Use api.js GET /api/user instead")
   console.log("Getting basic profile for ", req.user )
   try {
     const rituals = await Ritual.find( { user: req.user._id } ).lean()

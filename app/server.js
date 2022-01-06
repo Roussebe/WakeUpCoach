@@ -2,11 +2,9 @@ const dotenv = require('dotenv')
 
 const express = require('express')
 const session = require('express-session')
-//const cookieParser = require( 'cookie-parser' );
 const morgan = require('morgan');
 const path = require('path')
 const methodOverride = require('method-override')
-//const NedbStore = require('connect-nedb-session')(session);
 
 const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
@@ -16,8 +14,7 @@ const {create} = require('express-handlebars')
 
 console.log( "Starting up " + Date() )
 
-
-dotenv.config( {path: './srv/config/config.env' })
+dotenv.config( {path: './app/config/config.env' })
 
 require( './config/passport' )(passport)
 const PORT = process.env.PORT || 8080
@@ -99,14 +96,20 @@ app.use(function (req, res, next) {
   next()
 })
 
+
 //Routes
-app.use(express.static(path.join(__dirname, '../public/views')));
+app.use(express.static(path.join(__dirname, '../build')));
 app.use('/', require('./routes/index' ))
+app.use('/api', require('./routes/api'))
 app.use('/auth', require('./routes/auth' ))
 app.use('/stories', require('./routes/stories' ))
 app.use('/rituals', require('./routes/rituals' ))
 app.use('/users', require('./routes/users' ))
 app.use('/habits', require('./routes/habits' ))
+
+app.get('*', (req, res) => {
+  res.redirect('/')
+})
 
 app.use(function (req, res, next) {
   res.locals.user = req.user || null
