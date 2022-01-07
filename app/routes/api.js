@@ -19,35 +19,9 @@ async function getUser( user_id, res ) {
 
     let obj = {
       id: user._id,
-
       pseudo: user.firstName,
       picture: user.image,
       createdAt: user.createdAt,
-
-      rituals: rituals.map( r => {
-        console.log( r )
-        let habits = r.habits
-        console.log( habits )
-
-        if( r.history && r.history.habits[today] ) {
-          const achievements = r.history.habits[today]
-          habits = habits.map( habit => {
-            if( achievements.find( (achieve) => { return habit._id.equals( achieve.habit ) } )) {
-              console.log( "Achieved")
-              habit.achieved = true
-            }
-            console.log( "Habit", habit )
-            return habit
-          })
-        }
-        console.log( "New achievement", habits )
-        return {
-          key: r._id,
-          title: r.title,
-          time: r.time,
-          habits: habits
-        }
-      } )
     }
     console.log( obj )
     res.send( obj )

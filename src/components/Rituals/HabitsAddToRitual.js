@@ -44,7 +44,7 @@ const HabitsAddToRitual = ( {ritualId} ) => {
             ? true
             : false
           ,
-          key: habit._id
+          _id: habit._id
         }
       })
       console.log( "New Selection ", newSelection )
@@ -55,7 +55,8 @@ const HabitsAddToRitual = ( {ritualId} ) => {
   function toogleSelection( habit ) {
     let changedHabit = {...habit, selected: !habit.selected}
     let newSelection = userHabitSelection.slice()
-    let idx = newSelection.findIndex( (h) => { return h.key == habit.key } )
+    console.log( newSelection )
+    let idx = newSelection.findIndex( (h) => { return h._id == habit._id } )
     newSelection[idx] = changedHabit
     setUserHabitSelection( newSelection )
   }
@@ -71,7 +72,7 @@ const HabitsAddToRitual = ( {ritualId} ) => {
       <table id="modal1_table" className="striped">
         <tbody>
         {userHabitSelection.map( habit => {
-          return <HabitSelector habit={habit} key={habit.key} myClick={(e) => {return toogleSelection(habit)} } />
+          return <HabitSelector habit={habit} key={habit._id} myClick={(e) => {return toogleSelection(habit)} } />
         })}
         </tbody>
       </table>

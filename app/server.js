@@ -97,7 +97,7 @@ app.use(function (req, res, next) {
 app.use(express.static(path.join(__dirname, '../build')));
 app.use('/', require('./routes/index' ))
 app.use('/api/ritual', require('./routes/api/ritual'))
-
+app.use('/api/user', require('./routes/api/user'))
 app.use('/api', require('./routes/api'))
 app.use('/auth', require('./routes/auth' ))
 app.use('/stories', require('./routes/stories' ))

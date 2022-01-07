@@ -1,6 +1,7 @@
 import {
   DELETE_RITUAL,
   GET_RITUALS,
+  TICK_HABIT,
   UPDATE_RITUAL_HABIT,
   UPDATE_RITUAL,
 } from "../actions/ritual.actions";
@@ -18,6 +19,14 @@ export default function ritualReducer(state = initialState, action) {
       newState[idx] = action.payload
       return newState
     }
+
+    case TICK_HABIT: {
+      let result = [...state]
+      let rIdx = result.findIndex( r => r._id == action.payload.ritual._id )
+      result[rIdx] = action.payload.ritual
+      return result
+    }
+
 
     case UPDATE_RITUAL:
       return state.map((ritual) => {

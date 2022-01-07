@@ -2,7 +2,10 @@ import axios from "axios";
 
 //
 export const GET_RITUALS = "GET_RITUALS";
-export const UPDATE_RITUAL_HABIT = "UPDATE_RITUAL_HABIT"
+export const UPDATE_RITUAL_HABIT = "UPDATE_RITUAL_HABIT";
+export const TICK_HABIT = "TICK_HABIT";
+
+
 export const ADD_RITUAL = "ADD_RITUAL";
 export const UPDATE_RITUAL = "UPDATE_RITUAL";
 export const DELETE_RITUAL = "DELETE_RITUAL";
@@ -24,11 +27,12 @@ export const getRituals = (num) => {
 
 export const updateRitualHabits = (ritual, habits) => {
   return (dispatch) => {
+    console.log( habits )
     const request = habits
-      .filter( (h) => h.selected )
-      .map( (h) => {
-        return { _id: h.key, title: h.title }
-      })
+      .filter( (habit) => habit.selected )
+      .map( (habit) => {
+        return { _id: habit._id, title: habit.title }
+      });
 
     return axios.post(`${process.env.REACT_APP_API_URL}api/ritual/upd_habit/${ritual}`, { data : request} )
       .then( (res) => {
@@ -37,6 +41,21 @@ export const updateRitualHabits = (ritual, habits) => {
       } )
       .catch( (error) => { console.error( error ) });
   }
+}
+
+export const tickHabit = (ritual, habit) => {
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/ritual/tick_habit` ,
+      data: { params: {ritual, habit} },
+    })
+      .then((res) => {
+        console.log( res.data )
+        dispatch({ type: TICK_HABIT, payload: {ritual: res.data.ritual} });
+      })
+      .catch((err) => console.log(err));
+  };
 }
 
 export const addRitual = (data) => {

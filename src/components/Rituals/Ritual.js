@@ -4,7 +4,7 @@ import DeleteRitual from "./DeleteRitual";
 
 import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../Utils";
-import { tickHabit } from "../../actions/user.actions";
+import { tickHabit } from "../../actions/ritual.actions";
 
 function isHabitAchieved( ritual, habit, day ) {
   if( !day ) {
@@ -26,8 +26,8 @@ const Ritual = ({ritual, onAddHabits}) => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
 
-  function validateHabit(e, ritual, habit) {
-    dispatch(tickHabit(userData.id, ritual, habit));
+  function validateHabit(ritual, habit) {
+    dispatch(tickHabit(ritual, habit));
   }
 
   function showHabit() {}
@@ -50,12 +50,12 @@ const Ritual = ({ritual, onAddHabits}) => {
             </div>
             <div className="card-body">
               {ritual.habits.map( (habit) => (
-                <div className="black-text habit-card">
+                <div className="black-text habit-card" key={habit._id}>
                   <div className="gh-details">
-                  <div className="gh-subtitle" onClick={(e) => showHabit(e, ritual, habit)
+                  <div className="gh-subtitle" onClick={(e) => showHabit(ritual, habit)
                   }>{habit.title}</div>
                 </div>
-                <div className="gh-options"><a onClick={(e) => validateHabit(e, ritual, habit)} >
+                <div className="gh-options"><a onClick={(e) => validateHabit(ritual, habit)} >
                   {isHabitAchieved( ritual, habit )
                     ? <i className="green-text far fa-check-circle" />
                     : <i className="blue-text far fa-circle" />
