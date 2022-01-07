@@ -139,35 +139,6 @@ router.get('/list_to_add/:rid', ensureAuth, async (req, res) => {
     res.send( habits )
 })
 
-router.post('/add_habit/:rid', ensureAuth, async (req, res) => {
-    console.log( "Adding habit(s) to ritual " + req.params.rid )
-    let user = await User.findOne( { _id: req.user._id } ).lean()
-    let ritual = await Ritual.findOne( { _id: req.params.rid } ).lean()
-    let habits = await Habit.find( {} ).lean()
-
-    if( !user || !ritual || !habits )
-        return res.status( 404 ).send() // res.render('error/404')
-
-    if( ! ritual.user.equals( req.user._id ) ) return res.status( 401 ).send() //res.render( 'error/401' )
-
-    console.log( req.body )
-
-    if( !req.body.result ) return res.status( 400 ).send()
-
-    let newSetting = req.body.result.map( (data) => {
-      let habit = habits.find( h => h._id.equals( data._id ) )
-      if( habit )
-        return { _id: habit._id, title: habit.title }
-    })
-
-    console.log( "New habits: ", newSetting )
-
-    ritual.habits = newSetting
-
-    await Ritual.updateOne( { _id: ritual._id }, ritual )
-
-    res.send(JSON.stringify( { ok: 200 } ) ) //Status( 200 )
-})
 
 router.delete('/delete_habit/:idr/:idh', ensureAuth, async (req, res ) => {
     console.log( "Delete an habit from this ritual " + req.params.idr + " " + req.params.idh )

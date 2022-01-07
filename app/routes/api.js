@@ -1,5 +1,6 @@
 const express = require( 'express' )
 const router = express.Router()
+
 const { ensureAuth, adminAuth } = require( './middleware' )
 const Habit = require( '../models/Habit' )
 const User = require( '../models/User' )
@@ -31,7 +32,6 @@ async function getUser( user_id, res ) {
         if( r.history && r.history.habits[today] ) {
           const achievements = r.history.habits[today]
           habits = habits.map( habit => {
-            console.log( habit._id )
             if( achievements.find( (achieve) => { return habit._id.equals( achieve.habit ) } )) {
               console.log( "Achieved")
               habit.achieved = true
@@ -60,7 +60,6 @@ async function getUser( user_id, res ) {
 function getBasicInfo( req, res ) {
   res.send( { id: req.user.id, pseudo: req.user.firstName, picture: req.user.image, createdAt: req.user.createdAt } )
 }
-
 
 router.get('/user', ensureAuth, async (req, res) => {
   console.log("Getting basic profile for ", req.user )

@@ -19,7 +19,6 @@ dotenv.config( {path: './app/config/config.env' })
 require( './config/passport' )(passport)
 const PORT = process.env.PORT || 8080
 
-
 connectDB()
 
 const app = express();
@@ -84,8 +83,6 @@ app.use(session({ secret: 'yoursecret'
                              }
                    , store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
                    }));
-console.log( "App user done" )
- //dbStore({ filename: path.join(__dirname, '../DB/session.nedb') })
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -96,10 +93,11 @@ app.use(function (req, res, next) {
   next()
 })
 
-
 //Routes
 app.use(express.static(path.join(__dirname, '../build')));
 app.use('/', require('./routes/index' ))
+app.use('/api/ritual', require('./routes/api/ritual'))
+
 app.use('/api', require('./routes/api'))
 app.use('/auth', require('./routes/auth' ))
 app.use('/stories', require('./routes/stories' ))

@@ -12,6 +12,13 @@ export default function userReducer(state = initialState, action) {
       console.log( "user reducer get user " , action.payload )
       return action.payload;
     }
+    /*
+    case UPDATE_USER_RITUAL: {
+      let newState = {...state}
+      let rIdx = newState.rituals.findIndex( r => r.key == action.payload.ritual._id )
+      newState.rituals[rIdx] = action.payload.ritual
+      return newState
+    }*/
     case UPDATE_BIO:
       return {
         ...state,
@@ -22,14 +29,9 @@ export default function userReducer(state = initialState, action) {
         ...state,
         rituals: state.rituals.slice()
       }
-      console.log( "Result: ", result )
-      console.log( action )
       let ritual = result.rituals.find( r => r.key == action.payload.ritual.key )
-      console.log( "Ritual", ritual)
       let hIdx = ritual.habits.findIndex( h => h._id == action.payload.habit._id )
-      console.log( "hIdx = " + hIdx )
       let habit = {...ritual.habits[hIdx]}
-      console.log( "Habit", habit )
       habit.achieved = true
       ritual.habits[hIdx] = habit
       return result

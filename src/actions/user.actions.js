@@ -2,16 +2,16 @@ import axios from "axios";
 
 export const GET_USER = "GET_USER";
 export const UPDATE_BIO = "UPDATE_BIO";
+
 export const TICK_HABIT = "TICK_HABIT";
 export const GET_USER_ERRORS = "GET_USER_ERRORS";
 
 export const getUser = (uid) => {
   return (dispatch) => {
-    console.log( "getUser" )
     return axios
       .get(`${process.env.REACT_APP_API_URL}api/user/${uid}`)
       .then((res) => {
-        console.log( res.data )
+        console.log( "/api/user result", res.data )
         dispatch({ type: GET_USER, payload: res.data });
       })
       .catch((err) => console.log(err));

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 //
-export const GET_RITUALS = "GET_rituals";
-export const GET_ALL_RITUALS = "GET_ALL_RITUALS";
+export const GET_RITUALS = "GET_RITUALS";
+export const UPDATE_RITUAL_HABIT = "UPDATE_RITUAL_HABIT"
 export const ADD_RITUAL = "ADD_RITUAL";
 export const UPDATE_RITUAL = "UPDATE_RITUAL";
 export const DELETE_RITUAL = "DELETE_RITUAL";
@@ -16,13 +16,28 @@ export const getRituals = (num) => {
       .get(`${process.env.REACT_APP_API_URL}api/ritual/`)
       .then((res) => {
         console.log( "/api/ritual result " , res.data )
-        const array = res.data.slice(0, num);
-        dispatch({ type: GET_RITUALS, payload: array });
-        dispatch({ type: GET_ALL_RITUALS, payload: res.data });
+        dispatch({ type: GET_RITUALS, payload: res.data.rituals });
       })
       .catch((err) => console.log(err));
   };
 };
+
+export const updateRitualHabits = (ritual, habits) => {
+  return (dispatch) => {
+    const request = habits
+      .filter( (h) => h.selected )
+      .map( (h) => {
+        return { _id: h.key, title: h.title }
+      })
+
+    return axios.post(`${process.env.REACT_APP_API_URL}api/ritual/upd_habit/${ritual}`, { data : request} )
+      .then( (res) => {
+        console.log( "/api/ritual/upd_habit/", res.data )
+        dispatch( { type: UPDATE_RITUAL_HABIT, payload: res.data.ritual } )
+      } )
+      .catch( (error) => { console.error( error ) });
+  }
+}
 
 export const addRitual = (data) => {
   return (dispatch) => {

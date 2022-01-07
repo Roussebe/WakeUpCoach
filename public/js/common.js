@@ -1,7 +1,6 @@
 let app_context = {}
 
 document.addEventListener('DOMContentLoaded', async function() {
-  console.log( "Event Listener" )
   // nav menu
 
   // add recipe form

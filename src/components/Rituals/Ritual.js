@@ -6,6 +6,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../Utils";
 import { tickHabit } from "../../actions/user.actions";
 
+function isHabitAchieved( ritual, habit, day ) {
+  if( !day ) {
+    const today = new Date()
+    day = (today.getMonth()+1) + "/" + today.getDate() + "/" + (today.getFullYear())
+  }
+
+  let habits = ritual.habits
+
+  if( ritual.history && ritual.history.habits[day] ) {
+    const achievements = ritual.history.habits[day]
+    let dayHabit = achievements.find( a => a.habit == habit._id )
+    if( dayHabit ) return true
+  }
+  return false
+}
+
 const Ritual = ({ritual, onAddHabits}) => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
@@ -26,7 +42,7 @@ const Ritual = ({ritual, onAddHabits}) => {
 
                 <i className="material-icons black-text">edit</i>
 
-                <a class="modal-trigger" onClick={(e) => onAddHabits(ritual.key)} href="#modal-add-habits-to-ritual">
+                <a class="modal-trigger" onClick={(e) => onAddHabits(ritual._id)} href="#modal-add-habits-to-ritual">
                   <i className="material-icons black-text">add</i>
                 </a>
               </div>
@@ -36,11 +52,11 @@ const Ritual = ({ritual, onAddHabits}) => {
               {ritual.habits.map( (habit) => (
                 <div className="black-text habit-card">
                   <div className="gh-details">
-                  <div className="gh-subtitle" onClick={(e) => this.showHabit(e, ritual, habit)
+                  <div className="gh-subtitle" onClick={(e) => showHabit(e, ritual, habit)
                   }>{habit.title}</div>
                 </div>
                 <div className="gh-options"><a onClick={(e) => validateHabit(e, ritual, habit)} >
-                  {habit.achieved
+                  {isHabitAchieved( ritual, habit )
                     ? <i className="green-text far fa-check-circle" />
                     : <i className="blue-text far fa-circle" />
                   }
