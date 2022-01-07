@@ -4,6 +4,7 @@ import { UidContext } from "./components/AppContext";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
+import { getHabits } from "./actions/habit.actions";
 import logger from 'redux-logger'
 
 const App = () => {
@@ -28,7 +29,10 @@ const App = () => {
 
     fetchToken();
     console.log( uid )
-    if (uid) dispatch(getUser(uid));
+    if (uid) {
+      dispatch(getUser(uid));
+      dispatch(getHabits(20));
+    }
   }, [uid, dispatch]);
 
   return (
