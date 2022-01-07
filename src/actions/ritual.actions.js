@@ -5,7 +5,6 @@ export const GET_RITUALS = "GET_RITUALS";
 export const UPDATE_RITUAL_HABIT = "UPDATE_RITUAL_HABIT";
 export const TICK_HABIT = "TICK_HABIT";
 
-
 export const ADD_RITUAL = "ADD_RITUAL";
 export const UPDATE_RITUAL = "UPDATE_RITUAL";
 export const DELETE_RITUAL = "DELETE_RITUAL";
@@ -27,7 +26,6 @@ export const getRituals = (num) => {
 
 export const updateRitualHabits = (ritual, habits) => {
   return (dispatch) => {
-    console.log( habits )
     const request = habits
       .filter( (habit) => habit.selected )
       .map( (habit) => {
@@ -51,7 +49,7 @@ export const tickHabit = (ritual, habit) => {
       data: { params: {ritual, habit} },
     })
       .then((res) => {
-        console.log( res.data )
+        console.log( "/api/ritual/tick_habit", res.data )
         dispatch({ type: TICK_HABIT, payload: {ritual: res.data.ritual} });
       })
       .catch((err) => console.log(err));

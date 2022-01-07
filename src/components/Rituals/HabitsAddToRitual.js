@@ -27,7 +27,6 @@ const HabitsAddToRitual = ( {ritualId} ) => {
   const [userHabitSelection, setUserHabitSelection] = useState( [] )
 
   useEffect( () => {
-    console.log( "Mounting" )
     var modal = document.getElementById('modal-add-habits-to-ritual');
     var instances = M.Modal.init(modal, {});
   }, [])
@@ -55,14 +54,12 @@ const HabitsAddToRitual = ( {ritualId} ) => {
   function toogleSelection( habit ) {
     let changedHabit = {...habit, selected: !habit.selected}
     let newSelection = userHabitSelection.slice()
-    console.log( newSelection )
     let idx = newSelection.findIndex( (h) => { return h._id == habit._id } )
     newSelection[idx] = changedHabit
     setUserHabitSelection( newSelection )
   }
 
   function saveHabits() {
-    console.log( "saveHabits" )
     dispatch(updateRitualHabits(ritualId, userHabitSelection))
   }
 
@@ -83,11 +80,5 @@ const HabitsAddToRitual = ( {ritualId} ) => {
     </div>
   )
 }
-
-/*
-
-
-
-*/
 
 export default HabitsAddToRitual
