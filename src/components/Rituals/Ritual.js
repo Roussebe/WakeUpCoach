@@ -6,15 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../Utils";
 import { tickHabit } from "../../actions/user.actions";
 
-const Ritual = ({ritual}) => {
+const Ritual = ({ritual, onAddHabits}) => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
 
   function validateHabit(e, ritual, habit) {
     dispatch(tickHabit(userData.id, ritual, habit));
   }
-
-
 
   function showHabit() {}
 
@@ -25,8 +23,12 @@ const Ritual = ({ritual}) => {
               <div className="time left"><h6>{ritual.time}</h6></div>
               <div className="title left"><h6>{ritual.title}</h6></div>
               <div className="card-actions right">
+
                 <i className="material-icons black-text">edit</i>
-                <i className="material-icons black-text">add</i>
+
+                <a class="modal-trigger" onClick={(e) => onAddHabits(ritual.key)} href="#modal-add-habits-to-ritual">
+                  <i className="material-icons black-text">add</i>
+                </a>
               </div>
 
             </div>
