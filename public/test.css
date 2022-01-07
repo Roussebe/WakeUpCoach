@@ -25,11 +25,3 @@ nav {
 .nav-container a span {
   font-weight: bold;
 }
-
-nav .sidenav-trigger {
-  margin: 0 !important;
-}
-
-.sidenav {
-  backgound-color: #000;
-}

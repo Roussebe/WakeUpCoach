@@ -4,10 +4,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Navbar from '../Navbar';
 import Home from '../../pages/Home';
 import Profil from '../../pages/Profil';
-
+import Admin from '../../pages/Admin';
 import ListHabits from '../Habits/ListHabits';
-import AddHabit from '../Habits/AddHabit';
-import EditHabit from '../Habits/EditHabit';
+import ListRituals from '../Rituals/ListRituals';
 
 const index = () => {
   return (
@@ -15,8 +14,11 @@ const index = () => {
       <Navbar/>
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route path="/profil" exact element={<Profil />} />
-        <Route path="/habits/" exact element={<ListHabits />} />
+        <Route path="/Profil" exact element={<Profil />} />
+        <Route path="/Admin" exact element={<Admin />}>
+          <Route path="Habits" exact element={<ListHabits />} />
+          <Route path="Rituals" exact element={<ListRituals />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

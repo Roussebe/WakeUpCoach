@@ -23,7 +23,7 @@ const Logout = () => {
 
   return (
     <div className="logout" onClick={logout}>
-      <i className="material-icons black-text">exit_to_app</i>
+      <i className="material-icons">exit_to_app</i>
     </div>
   );
 };

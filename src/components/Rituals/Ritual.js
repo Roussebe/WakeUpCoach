@@ -1,26 +1,20 @@
 import React, { useContext } from "react";
-//import { UidContext } from "../components/AppContext";
-//import Thread from "../components/Thread";
+
 import DeleteRitual from "./DeleteRitual";
-//import LikeButton from "./LikeButton";
+
 import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../Utils";
 import { tickHabit } from "../../actions/user.actions";
 
-/*
-import Trends from "../components/Trends";
-import FriendsHint from "../components/Profil/FriendsHint";
-*/
 const Ritual = ({ritual}) => {
-  console.log( "Building home" )
-  //const uid = useContext(UidContext);
   const dispatch = useDispatch();
-
   const userData = useSelector((state) => state.userReducer);
 
   function validateHabit(e, ritual, habit) {
     dispatch(tickHabit(userData.id, ritual, habit));
   }
+
+
 
   function showHabit() {}
 
@@ -59,7 +53,5 @@ const Ritual = ({ritual}) => {
     </li>
   );
 };
-
-//
 
 export default Ritual;

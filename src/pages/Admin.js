@@ -1,15 +1,20 @@
 import React, { useContext } from "react";
+import {Outlet} from "react-router-dom";
+
 import { UidContext } from "../components/AppContext";
 import Log from "../components/Log";
 import Dashboard from "../components/Dashboard";
 
-const Home = () => {
+const Admin = () => {
   const uid = useContext(UidContext);
 
   return (
     <div className="main-container">
       {uid ? (
-        <Dashboard />
+        <>
+        <h4>Admin Page</h4>
+        <Outlet />
+        </>
       ) : (
         <Log signin={true} signup={false} />
       )}
@@ -17,4 +22,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Admin;

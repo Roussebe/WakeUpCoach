@@ -9,7 +9,6 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     let sidenav = document.querySelectorAll('.sidenav')
-    //console.log( "Sidenav", sidenav )
     M.Sidenav.init( sidenav, {
       edge: "left"
     } )
@@ -19,26 +18,24 @@ class Navbar extends React.Component {
     return (
       <>
       <nav>
-        <div className="nav-wrapper container nav-container black-text">
+        <div className="nav-wrapper container nav-container">
           <span className="left">
             <a href="#" data-target="slide-out" className="sidenav-trigger show-on-large">
-              <i className="material-icons black-text">menu</i>
+              <i className="material-icons">menu</i>
             </a>
           </span>
-          <a className="right black-text" href="/">
+          <a className="right" href="/">
             Good<span>Habits</span>
           </a>
           <Logout />
         </div>
       </nav>
       <div>
-      <ul className="sidenav" id="slide-out">
+      <ul className="sidenav sidenav-close" id="slide-out">
         <li />
-        <li><a href="/stories">Public Stories</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/rituals">Rituals</a></li>
-        <li><NavLink exact to="/habits/"><a href="#">Habits</a></NavLink></li>
-        <li><a href="/users">Users</a></li>
+        <li><NavLink exact to="/">Home</NavLink></li>
+        <li><NavLink exact to="/Profil">Profil</NavLink></li>
+        <li><NavLink exact to="/Admin/Habits">Habits</NavLink></li>
         <li><a href="/auth/logout">Logout</a></li>
       </ul>
       </div>
