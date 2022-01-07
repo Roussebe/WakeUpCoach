@@ -8,7 +8,7 @@ import M from  'materialize-css';
 class Navbar extends React.Component {
 
   componentDidMount() {
-    let sidenav = document.querySelectorAll('.sidenav')
+    let sidenav = document.getElementById('slide-out')
     M.Sidenav.init( sidenav, {
       edge: "left"
     } )
