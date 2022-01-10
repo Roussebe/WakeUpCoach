@@ -9,26 +9,36 @@ import { getRituals } from "./actions/ritual.actions";
 
 import logger from 'redux-logger'
 
+if( ! process.env.REACT_APP_API_URL )
+{
+  process.env.REACT_APP_API_URL = "/"
+}
+
 const App = () => {
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchToken = async () => {
+      console.log( "GET " + `${process.env.REACT_APP_API_URL}jwtid`)
       await axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}jwtid`,
-        withCredentials: true,
+        withCredentials: false,
       })
         .then((res) => {
+          console.log ("Received" , res )
           setUid(res.data);
         })
-        .catch((err) => console.log("No token"));
+        .catch((err) => {
+          console.log("No token", err);
+        })
     };
 
     fetchToken();
-
+    console.log( "uid", uid )
     if (uid) {
+      console.log( "Get the informations" )
       dispatch(getUser(uid));
       dispatch(getHabits(20));
       dispatch(getRituals(20));

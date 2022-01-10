@@ -27,7 +27,7 @@ const UpdateProfil = () => {
         <div className="left-part">
           <h3>Photo de profil</h3>
           <img src={userData.picture} alt="user-pic" />
-          <UploadImg />
+          {/* <UploadImg /> */}
           <p>{error.maxSize}</p>
           <p>{error.format}</p>
         </div>
@@ -78,7 +78,7 @@ const UpdateProfil = () => {
                         <img src={user.picture} alt="user-pic" />
                         <h4>{user.pseudo}</h4>
                         <div className="follow-handler">
-                          <FollowHandler idToFollow={user._id} type={'suggestion'} />
+                          {/* <FollowHandler idToFollow={user._id} type={'suggestion'} /> */}
                         </div>
                       </li>
                     );
@@ -106,7 +106,7 @@ const UpdateProfil = () => {
                         <img src={user.picture} alt="user-pic" />
                         <h4>{user.pseudo}</h4>
                         <div className="follow-handler">
-                          <FollowHandler idToFollow={user._id} type={'suggestion'} />
+                          {/* <FollowHandler idToFollow={user._id} type={'suggestion'} /> */}
                         </div>
                       </li>
                     );

@@ -64,8 +64,8 @@ const HabitsAddToRitual = ( {ritualId} ) => {
   }
 
   return (
-    <div id="modal-add-habits-to-ritual" class="modal">
-      <div class="modal-content">
+    <div id="modal-add-habits-to-ritual" className="modal">
+      <div className="modal-content">
       <table id="modal1_table" className="striped">
         <tbody>
         {userHabitSelection.map( habit => {
@@ -74,8 +74,8 @@ const HabitsAddToRitual = ( {ritualId} ) => {
         </tbody>
       </table>
       </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat" onClick={saveHabits}>Confirmer</a>
+      <div className="modal-footer">
+        <a href="#!" className="modal-close waves-effect waves-green btn-flat" onClick={saveHabits}>Confirmer</a>
       </div>
     </div>
   )

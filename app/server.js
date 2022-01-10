@@ -12,6 +12,8 @@ const connectDB = require('./config/db')
 const passport = require('passport');
 const {create} = require('express-handlebars')
 
+const cors = require('cors')
+
 console.log( "Starting up " + Date() )
 
 dotenv.config( {path: './app/config/config.env' })
@@ -93,8 +95,14 @@ app.use(function (req, res, next) {
   next()
 })
 
+
+app.use(cors())
+
+
 //Routes
-app.use(express.static(path.join(__dirname, '../build')));
+const public_path = path.join(__dirname, '../client/build')
+console.log( public_path )
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.use('/', require('./routes/index' ))
 app.use('/api/ritual', require('./routes/api/ritual'))
 app.use('/api/user', require('./routes/api/user'))

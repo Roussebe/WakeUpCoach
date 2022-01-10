@@ -15,14 +15,14 @@ export default function ritualReducer(state = initialState, action) {
 
     case UPDATE_RITUAL_HABIT: {
       let newState = [...state]
-      let idx = newState.findIndex( (s) => s._id == action.payload._id )
+      let idx = newState.findIndex( (s) => s._id === action.payload._id )
       newState[idx] = action.payload
       return newState
     }
 
     case TICK_HABIT: {
       let result = [...state]
-      let rIdx = result.findIndex( r => r._id == action.payload.ritual._id )
+      let rIdx = result.findIndex( r => r._id === action.payload.ritual._id )
       result[rIdx] = action.payload.ritual
       return result
     }

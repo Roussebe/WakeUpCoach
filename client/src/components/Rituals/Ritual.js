@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 
 import DeleteRitual from "./DeleteRitual";
 
@@ -42,7 +41,7 @@ const Ritual = ({ritual, onAddHabits}) => {
 
                 <i className="material-icons black-text">edit</i>
 
-                <a class="modal-trigger" onClick={(e) => onAddHabits(ritual._id)} href="#modal-add-habits-to-ritual">
+                <a className="modal-trigger" onClick={(e) => onAddHabits(ritual._id)} href="#modal-add-habits-to-ritual">
                   <i className="material-icons black-text">add</i>
                 </a>
               </div>

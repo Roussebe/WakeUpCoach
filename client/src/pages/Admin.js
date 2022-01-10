@@ -3,7 +3,6 @@ import {Outlet} from "react-router-dom";
 
 import { UidContext } from "../components/AppContext";
 import Log from "../components/Log";
-import Dashboard from "../components/Dashboard";
 
 const Admin = () => {
   const uid = useContext(UidContext);

@@ -13,8 +13,14 @@ router.get('/', ensureGuest, (req, res) => {
 })
 */
 
-router.get('/jwtid', ensureAuth, async (req, res) => {
-  res.send( req.user._id )
+router.get('/jwtid', async (req, res) => {
+  if( req.user ) {
+    console.log( "Get JWTID", req.user._id )
+    res.send( req.user._id )
+  } else {
+    console.log( "Get JWTID with no user id" )
+    res.send( null ) ;
+  }
 })
 
 router.get('/dashboard', ensureAuth, async (req, res) => {

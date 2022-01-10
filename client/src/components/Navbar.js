@@ -33,9 +33,9 @@ class Navbar extends React.Component {
       <div>
       <ul className="sidenav sidenav-close" id="slide-out">
         <li />
-        <li><NavLink exact to="/">Home</NavLink></li>
-        <li><NavLink exact to="/Profil">Profil</NavLink></li>
-        <li><NavLink exact to="/Admin/Habits">Habits</NavLink></li>
+        <li><NavLink exact="true" to="/">Home</NavLink></li>
+        <li><NavLink exact="true" to="/Profil">Profil</NavLink></li>
+        <li><NavLink exact="true" to="/Admin/Habits">Habits</NavLink></li>
         <li><a href="/auth/logout">Logout</a></li>
       </ul>
       </div>
