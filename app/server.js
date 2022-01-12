@@ -5,6 +5,8 @@ const session = require('express-session')
 const morgan = require('morgan');
 const path = require('path')
 const methodOverride = require('method-override')
+const cors = require('cors');
+ 
 
 const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
@@ -26,10 +28,21 @@ connectDB()
 const app = express();
 const NODE_ENV = process.env.NODE_ENV || "development"
 
-
 if( NODE_ENV === 'development') {
     app.use( morgan( 'dev' ) )
+	
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
 }
+app.use(cors(corsOptions));
+
+}
+
 
 // Body parser
 app.use(express.urlencoded({ extended: false }))
