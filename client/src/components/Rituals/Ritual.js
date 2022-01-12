@@ -1,9 +1,9 @@
-
 import DeleteRitual from "./DeleteRitual";
 
 import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../Utils";
 import { tickHabit } from "../../actions/ritual.actions";
+import WeekDayPicker from "./WeekDayPicker";
 
 function isHabitAchieved( ritual, habit, day ) {
   if( !day ) {
@@ -38,14 +38,13 @@ const Ritual = ({ritual, onAddHabits}) => {
               <div className="time left"><h6>{ritual.time}</h6></div>
               <div className="title left"><h6>{ritual.title}</h6></div>
               <div className="card-actions right">
-
-                <i className="material-icons black-text">edit</i>
-
+                <a className="modal-trigger" onClick={(e) => onAddHabits(ritual._id)} href="#modal-ritual-editor">
+                  <i className="material-icons black-text">edit</i>
+                </a>
                 <a className="modal-trigger" onClick={(e) => onAddHabits(ritual._id)} href="#modal-add-habits-to-ritual">
                   <i className="material-icons black-text">add</i>
                 </a>
               </div>
-
             </div>
             <div className="card-body">
               {ritual.habits.map( (habit) => (
@@ -65,6 +64,7 @@ const Ritual = ({ritual, onAddHabits}) => {
             </div>
 
             <div className="card-footer">
+              <WeekDayPicker />
             </div>
           </div>
     </li>

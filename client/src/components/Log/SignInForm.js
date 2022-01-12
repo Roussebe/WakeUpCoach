@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const googleAuthLocalUrl = `${process.env.REACT_APP_API_URL}/auth/google`
+
 const SignInForm = () => {
 
 
@@ -43,7 +45,7 @@ const SignInForm = () => {
     </div>
     <div className="divider"></div>
     <div className="section">
-        <a href="/auth/google" className="btn red darken-1">
+        <a href={googleAuthLocalUrl} className="btn red darken-1">
             <i className="fab fa-google left"></i> Log In With Google
         </a>
     </div>

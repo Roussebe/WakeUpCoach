@@ -6,15 +6,13 @@ const morgan = require('morgan');
 const path = require('path')
 const methodOverride = require('method-override')
 const cors = require('cors');
- 
+
 
 const MongoStore = require('connect-mongo')
 const connectDB = require('./config/db')
 
 const passport = require('passport');
 const {create} = require('express-handlebars')
-
-const cors = require('cors')
 
 console.log( "Starting up " + Date() )
 
@@ -30,7 +28,7 @@ const NODE_ENV = process.env.NODE_ENV || "development"
 
 if( NODE_ENV === 'development') {
     app.use( morgan( 'dev' ) )
-	
+
 const corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
