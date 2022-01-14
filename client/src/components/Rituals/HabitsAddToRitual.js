@@ -26,6 +26,7 @@ const HabitsAddToRitual = ( {ritualId} ) => {
   const habits = useSelector((state) => state.habitReducer);
   const [userHabitSelection, setUserHabitSelection] = useState( [] )
 
+
   useEffect( () => {
     console.log( "HabitsAddToRitual useEffect" )
     if( document && document.getElementById('modal-add-habits-to-ritual' ) ) {

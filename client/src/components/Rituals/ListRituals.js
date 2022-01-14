@@ -16,14 +16,8 @@ const ListRituals = () => {
     setCurrentRitualId( id )
   }
 
-  function onInitModal( modal ) {
-    console.log( "Init Modal" )
-    M = modal;
-  }
+  function onUpdateRitual() {
 
-  function onOpenEditRitual() {
-    console.log( "Edit ritual" )
-    //M.open()
   }
 
   return (
@@ -31,12 +25,12 @@ const ListRituals = () => {
       <ul>
         { !isEmpty(rituals) && (
           rituals.map((ritual) => {
-            return <Ritual key={ritual._id} ritual={ritual} onAddHabits={onAddHabits} onEditRitual={onOpenEditRitual}/>
+            return <Ritual key={ritual._id} ritual={ritual} onAddHabits={onAddHabits} />
           })
         )}
       </ul>
-      <HabitsAddToRitual ritualId={currentRitualId}/>
-      <EditRitual onInitModal={onInitModal} />
+      <HabitsAddToRitual ritualId={currentRitualId} />
+      <EditRitual ritualId={currentRitualId} />
     </>
   );
 };
