@@ -6,11 +6,13 @@ const { ensureAuth, ensureGuest } = require( './middleware' )
 const Ritual = require( '../models/Ritual' )
 const User = require('../models/User' )
 const Habit = require('../models/Habit')
-
 /*
-router.get('/', ensureGuest, (req, res) => {
-    res.render('login', { layout: 'login' })
-})
+if( process.env.NODE_ENV == "development" ) {
+  router.get('/', ensureAuth, (req, res) => {
+    console.log( 'GET ROUTE LEVEL')
+    res.redirect('http://localhost:3030/')
+  })
+}
 */
 
 router.get('/jwtid', async (req, res) => {

@@ -21,7 +21,7 @@ function isHabitAchieved( ritual, habit, day ) {
   return false
 }
 
-const Ritual = ({ritual, onAddHabits}) => {
+const Ritual = ({ritual, onAddHabits, onEditRitual}) => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userReducer);
 
@@ -38,10 +38,10 @@ const Ritual = ({ritual, onAddHabits}) => {
               <div className="time left"><h6>{ritual.time}</h6></div>
               <div className="title left"><h6>{ritual.title}</h6></div>
               <div className="card-actions right">
-                <a className="modal-trigger" onClick={(e) => onAddHabits(ritual._id)} href="#modal-ritual-editor">
+                <a className="modal-trigger" onClick={(e) => onEditRitual(ritual._id)} href="#modal-ritual-editor">
                   <i className="material-icons black-text">edit</i>
                 </a>
-                <a className="modal-trigger" onClick={(e) => onAddHabits(ritual._id)} href="#modal-add-habits-to-ritual">
+                <a className="modal-trigger" onClick={(e) => onAddHabits(ritual._id)} href="#modal-add-habits-to-ritual" >
                   <i className="material-icons black-text">add</i>
                 </a>
               </div>

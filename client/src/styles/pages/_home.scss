@@ -34,6 +34,8 @@
    background: $color-4;
    border-radius: 20px;
    padding: 20px;
+   max-width: 500px;
+   align-self: center;
 
    ul {
      display: flex;

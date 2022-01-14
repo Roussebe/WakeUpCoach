@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import WeekDayPicker from "./WeekDayPicker"
 
 import M from  'materialize-css';
 
 
+const EditRitual = ( {onInitModal} ) => {
 
-const EditRitual = () => {
-
-  useEffect( () => {
-    /*
+  useEffect ( () => {
+    console.log( "EditRitual UseEffect" )
+    
     var modal = document.getElementById('modal-ritual-editor');
-    var instances = M.Modal.init(modal, {});
-    */
+    var instance = M.Modal.init(modal, {});
+    onInitModal( instance )
   }, [])
 
   return (

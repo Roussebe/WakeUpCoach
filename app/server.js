@@ -27,17 +27,18 @@ const app = express();
 const NODE_ENV = process.env.NODE_ENV || "development"
 
 if( NODE_ENV === 'development') {
-    app.use( morgan( 'dev' ) )
 
-const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  'allowedHeaders': ['sessionId', 'Content-Type'],
-  'exposedHeaders': ['sessionId'],
-  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'preflightContinue': false
-}
-app.use(cors(corsOptions));
+  const corsOptions = {
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false
+  }
+  app.use(cors(corsOptions));
+
+  app.use( morgan( 'dev' ) )
 
 }
 
@@ -113,6 +114,7 @@ app.use(cors())
 //Routes
 const public_path = path.join(__dirname, '../client/build')
 console.log( public_path )
+
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use('/', require('./routes/index' ))
 app.use('/api/ritual', require('./routes/api/ritual'))

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import GoogleLogin from "react-google-login"
+
 
 const googleAuthLocalUrl = `${process.env.REACT_APP_API_URL}/auth/google`
 
 const SignInForm = () => {
-
-
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,6 +38,22 @@ const SignInForm = () => {
       });
   };
 
+  const responseSuccessGoogle = (response) => {
+    console.log( "GoogleResponse" )
+    console.log(response)
+    axios({
+      method: "POST",
+      url: "http://localhost:8080/api/googlelogin",
+      data: {tokenId: response.tokenId}
+    }).then( response  => {
+      console.log( response )
+    })
+  }
+
+  const responseErrorGoogle = (response) => {
+
+  }
+
   return (
     <>
     <div className="section">
@@ -45,6 +61,14 @@ const SignInForm = () => {
     </div>
     <div className="divider"></div>
     <div className="section">
+      {/*<GoogleLogin
+        clientId="1094692903229-ji3ffqddf1hm8puv2eui5irmu9acc091.apps.googleusercontent.com"
+        buttonText="Login with Google"
+        onSuccess={responseSuccessGoogle}
+        onFailure={responseErrorGoogle}
+        cookiePolicy={'single_host_origin'}
+        />*/}
+
         <a href={googleAuthLocalUrl} className="btn red darken-1">
             <i className="fab fa-google left"></i> Log In With Google
         </a>

@@ -27,9 +27,13 @@ const HabitsAddToRitual = ( {ritualId} ) => {
   const [userHabitSelection, setUserHabitSelection] = useState( [] )
 
   useEffect( () => {
-    var modal = document.getElementById('modal-add-habits-to-ritual');
-    var instances = M.Modal.init(modal, {});
+    console.log( "HabitsAddToRitual useEffect" )
+    if( document && document.getElementById('modal-add-habits-to-ritual' ) ) {
+      var modal = document.getElementById('modal-add-habits-to-ritual');
+      var instances = M.Modal.init(modal, {});
+    }
   }, [])
+
 
 
   useEffect( () => {
