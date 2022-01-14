@@ -39,13 +39,16 @@ const EditRitual = ( {ritualId} ) => {
                   <label for="email">Email</label>
                 </div>
               </div>
+              <div class="row">
+                <WeekDayPicker />
+              </div>
             </form>
         </div>
       }
       <div className="modal-footer">
         {/*<a href="#!" className="modal-close waves-effect waves-green btn-flat" onClick={saveHabits}>Confirmer</a>*/}
       </div>
-      <WeekDayPicker />
+
     </div>
   )
 }

@@ -61,13 +61,7 @@ const SignInForm = () => {
     </div>
     <div className="divider"></div>
     <div className="section">
-      {/*<GoogleLogin
-        clientId="1094692903229-ji3ffqddf1hm8puv2eui5irmu9acc091.apps.googleusercontent.com"
-        buttonText="Login with Google"
-        onSuccess={responseSuccessGoogle}
-        onFailure={responseErrorGoogle}
-        cookiePolicy={'single_host_origin'}
-        />*/}
+
 
         <a href={googleAuthLocalUrl} className="btn red darken-1">
             <i className="fab fa-google left"></i> Log In With Google
