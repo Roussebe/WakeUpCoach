@@ -43,7 +43,7 @@ const SignInForm = () => {
     console.log(response)
     axios({
       method: "POST",
-      url: "http://localhost:8080/api/googlelogin",
+      url: "/api/googlelogin",
       data: {tokenId: response.tokenId}
     }).then( response  => {
       console.log( response )
