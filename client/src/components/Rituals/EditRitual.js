@@ -5,7 +5,7 @@ import {isEmpty} from "../Utils"
 import WeekDayPicker from "./WeekDayPicker"
 
 import M from  'materialize-css';
-
+import $ from 'jquery';
 
 const EditRitual = ( {ritualId} ) => {
   const rituals = useSelector((state) => state.ritualReducer);
@@ -22,22 +22,26 @@ const EditRitual = ( {ritualId} ) => {
       return rituals.find( r => r._id === id )
   }
 
+  const saveRitual = () => {
+    let newRitual = {...getRitual(ritualId) }
+    const form = document.getElementById( "editRitualForm" )
+    const title = $( "#editRitualForm #title" )
+
+    console.log( newRitual )
+    console.log( title.val() )
+  }
+
   return (
     <div id="modal-ritual-editor" className="modal">
       {getRitual( ritualId ) &&
         <div className="modal-content">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Placeholder" id="title" type="text" class="validate" value={getRitual(ritualId).title}/>
-                  <label for="title">Title</label>
-                </div>
+            <form class="col s12" id="editRitualForm">
+              <div class="input-field row">
+                  <input id="title" type="text" value={getRitual(ritualId).title}></input>
               </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="email" type="email" class="validate" />
-                  <label for="email">Email</label>
-                </div>
+              <div class="input-field row">
+                <label class="active" for="time">Alarm</label>
+                <input  id="time" type="time" value={getRitual(ritualId).time} />
               </div>
               <div class="row">
                 <WeekDayPicker />
@@ -46,7 +50,7 @@ const EditRitual = ( {ritualId} ) => {
         </div>
       }
       <div className="modal-footer">
-        {/*<a href="#!" className="modal-close waves-effect waves-green btn-flat" onClick={saveHabits}>Confirmer</a>*/}
+        <a href="#!" className="modal-close waves-effect waves-green btn-flat" onClick={saveRitual}>Confirm</a>
       </div>
 
     </div>
