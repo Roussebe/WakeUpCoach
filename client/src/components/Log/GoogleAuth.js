@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 class GoogleAuth extends Component {
   state = { isSignedIn: null }
 
+
   componentDidMount() {
     window.gapi.load("auth2", () => {
       window.gapi.auth2
